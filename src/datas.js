@@ -4,8 +4,20 @@ import { MdStar } from "react-icons/md";
 
 // 사용자 정보
 export const initialUserInfo = {
-  first:'서울',
-  second: '종로구'
+  first:'경북',
+  second: '진량읍'
+}
+
+export const initialApiData = {
+  data: [],
+  list: []
+}
+
+export const firstPageState = {
+  ...initialUserInfo
+}
+export const secondPageState = {
+  first:'서울'
 }
 
 export const navigatorMenu = [

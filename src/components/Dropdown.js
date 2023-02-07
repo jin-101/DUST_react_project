@@ -1,10 +1,10 @@
-import { regionList } from "../datas";
+import uuid from "react-uuid";
 
-function Dropdown ({onChange}){
+function Dropdown ({name, val, list, onChange}){
   return (
-      <select onChange={(e)=>{onChange(e.target.value)}}>
-        {regionList.map((el,i) => {
-          return <option key={i} defaultValue={'서울'}>{el}</option>;
+      <select name={name} onChange={(e)=>{onChange(e)}} key={uuid()} defaultValue={val}>
+        {list.map((el,i) => {
+          return <option key={i} value={el}>{el}</option>;
         })}
       </select>
   )
