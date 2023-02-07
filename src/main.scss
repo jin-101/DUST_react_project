@@ -1,0 +1,55 @@
+.flex {
+  display: flex;
+  &.pos{
+    &-mc {
+      align-items:center;
+      justify-content:center;
+    }
+    &-b {
+      align-items: end;
+    }
+    &-c{
+      justify-content:center;
+    }
+  }
+}
+
+.w {
+  &-80per {
+    width: 80%;
+  }
+}
+
+.mg {
+  &-small {
+    margin: 10px;
+  }
+  &-medium {
+    margin: 20px;
+  }
+  &-large {
+    margin: 40px;
+  }
+  &-left {
+    &-s {
+      margin-left: 10px;
+    }
+  }
+  &-bottom {
+    &-s {
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.fs {
+  &-small {
+    font-size: 15px;
+  }
+  &-medium {
+    font-size: 25px;
+  }
+  &-large {
+    font-size: 45px;
+  }
+}
