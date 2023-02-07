@@ -1,4 +1,4 @@
-const regionList = ['서울','부산','대구','인천','광주','대전','울산','경기','강원','충남','충북','전남','전북','경남','경북','제주','세종','전국']
+import { regionList } from "../datas";
 
 function Dropdown ({onChange}){
   return (

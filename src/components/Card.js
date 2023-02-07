@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Favorite from "./Favorite";
 import '../main.scss';
+import { makeInfomation } from "../datas";
 
 const Rect = styled.div`
   justify-content: center;
@@ -24,40 +25,6 @@ const DustGradeText = styled.div`
   color: ${props => props.color || 'black'};
 `;
 
-const makeInfomation = (grade) => {
-  switch(grade){
-    case '1':
-      return {
-        text : '좋음',
-        color: '#6698cb' //blue
-      };
-    case '2':
-      return {
-        text : '보통',
-        color: '#82c8a0' //green
-      };
-    case '3':
-      return {
-        text : '한때 나쁨',
-        color: '#f0d264' //yellow
-      };
-    case '4':
-      return {
-        text : '나쁨',
-        color: 'orange' //orange
-      };
-    case '5':
-      return {
-        text : '매우 나쁨',
-        color: '#fa5a5a' //red
-      };
-    default:
-      return {
-        text : '알수없음',
-        color: 'gray'
-      }
-  }
-}
 function Card ({stationName, pm10Value, pm10Grade, dataTime, sidoName}) {
   const {text, color} = makeInfomation(pm10Grade);
   return (

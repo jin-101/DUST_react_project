@@ -1,13 +1,20 @@
 import styled from "styled-components";
 import Card from "../components/Card";
+import Dropdown from "../components/Dropdown";
+import Loading from "../components/Loading";
 
 const Cards = styled.div`
   height: 600px;
   overflow : auto;
 `;
 
-function TotalRegion ({data}) {
+function TotalRegion ({data, onChange}) {  
   return (
+    <>
+    <div className='flex pos-mc mg-small'>
+      <Dropdown onChange={onChange}/>
+    </div>
+    {!data ?<Loading/>:
       <Cards>
         {data.map((el,index) => 
           <Card 
@@ -18,7 +25,8 @@ function TotalRegion ({data}) {
             sidoName={el.sidoName} 
             key={index}
           />)}
-      </Cards>
+      </Cards>}
+      </>
   )
 }
 
