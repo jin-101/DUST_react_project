@@ -6,8 +6,6 @@ import { firstPageState, inintialUserFavorite, initialApiData, navigatorMenu, re
 import MyRegion from './containers/MyRegion';
 import Loading from './components/Loading';
 import Dropdown from './components/Dropdown';
-import FavoriteRegion from './containers/FavoriteRegion';
-// import FavoriteRegion from './containers/FavoriteRegion';
 
 
 const Button = styled.div`
@@ -141,9 +139,21 @@ function App () {
         <div>
           { //content 부분
           apiData.data.length === 0 ? <Loading/>
-            :pageState===0 ? <MyRegion data={apiData.data} val = {[firstP,secondP][pageState]['second']}/> // page가 0일 때 가운데 영역 만들기
-              : pageState===1 ? <TotalRegion data={apiData.data} favoriteData={favoriteArray} onClick={favoriteOnClick} /> // page가 1일 때 가운데 영역 만들기   onClick={favoriteOnClick}
-                : pageState===2 ? <FavoriteRegion data={test} favoriteData={favoriteArray} onClick={favoriteOnClick} /> // page가 2일 때 가운데 영역 만들기   data = {favoriteArray} onClick={favoriteOnClick}
+            :pageState===0 ? <MyRegion 
+                                data={apiData.data} 
+                                val = {[firstP,secondP][pageState]['second']}
+                              /> // page가 0일 때 가운데 영역 만들기
+              : pageState===1 ? <TotalRegion 
+                                  data={apiData.data} 
+                                  favoriteData={favoriteArray} 
+                                  onClick={favoriteOnClick} 
+                                /> // page가 1일 때 가운데 영역 만들기   onClick={favoriteOnClick}
+                : pageState===2 ? <TotalRegion 
+                                    data={test} 
+                                    favoriteData={favoriteArray} 
+                                    onClick={favoriteOnClick}
+                                    isAll={true} 
+                                  /> // page가 2일 때 가운데 영역 만들기   data = {favoriteArray} onClick={favoriteOnClick}
                   : null 
           }
         </div>

@@ -7,14 +7,15 @@ const CardsStyle = styled.div`
   overflow : auto;
 `;
 
-function TotalRegion ({data, favoriteData, onClick}) {  
+function TotalRegion ({data, favoriteData, onClick, isAll=false}) {  
   console.log('1번일 때 내용카드만들기');
   if (!data || !favoriteData) return <Loading/>
+  const newData = isAll ? data.filter(x => favoriteData.includes(x.stationName)):data
   // console.log(favoriteData,data);
   return (
     <>
       <CardsStyle>
-        {data.map((el,index) => {
+        {newData.map((el,index) => {
           const bool = favoriteData.includes(el.stationName);
           return <Card 
             data = {el}
