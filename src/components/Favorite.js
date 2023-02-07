@@ -1,3 +1,4 @@
+// import { useState } from "react";
 import { useState } from "react";
 import { MdStar, MdStarBorder } from "react-icons/md";
 import styled from "styled-components";
@@ -7,14 +8,17 @@ const PosRight = styled.div`
   right: 20px
 `;
 
-function Favorite (){
-  const [favoriteState, setFavoriteState] = useState(false);
-  const favoriteChange = () => {
-    setFavoriteState(prev => !prev);
+function Favorite ({data, onClick, favorite=true}){
+  // const [bool, setBool] = useState(favorite)
+  const favoriteChange = (e) => {
+    console.log(favorite);
+    // setBool(prev => !prev)
+    onClick(favorite, data);
   }
+  console.log(favorite);
   return(
     <PosRight onClick={favoriteChange}>
-      {favoriteState?<MdStar/>:<MdStarBorder/>}
+      {favorite?<MdStarBorder/>:<MdStar/>}
     </PosRight>
   )
 }

@@ -18,6 +18,9 @@
   &-80per {
     width: 80%;
   }
+  &-100per {
+    width: 40%;
+  }
 }
 
 .h {
@@ -29,6 +32,12 @@
   }
   &-50{
     height: 50px;
+  }
+  &-30{
+    height: 30px;
+  }
+  &-100per {
+    height: 100%;
   }
 }
 
@@ -63,5 +72,17 @@
   }
   &-large {
     font-size: 45px;
+  }
+}
+
+.c {
+  &-blue {
+    background-color: blue;
+  }
+  &-green {
+    background-color: green;
+  }
+  &-yellow {
+    background-color: yellow;
   }
 }

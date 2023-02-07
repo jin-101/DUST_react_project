@@ -8,6 +8,7 @@ const Cards = styled.div`
 `;
 
 function MyRegion ({data, val}) {
+  console.log('0번일때 내용카드 만들기');
   if (!data) return <Loading/>
   const myRegion = data.filter((el) => el.stationName === val)[0] || data[0];
   if (!myRegion) return <Loading/>
@@ -15,11 +16,7 @@ function MyRegion ({data, val}) {
   <>
     <Cards>
         <Card 
-          stationName={myRegion.stationName} 
-          pm10Value={myRegion.pm10Value} 
-          pm10Grade={myRegion.pm10Grade} 
-          dataTime={myRegion.dataTime} 
-          sidoName={myRegion.sidoName}
+          data = {myRegion}
         />
     </Cards>
   </>

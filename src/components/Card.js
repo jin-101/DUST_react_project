@@ -25,7 +25,8 @@ const DustGradeText = styled.div`
   color: ${props => props.color || 'black'};
 `;
 
-function Card ({stationName, pm10Value, pm10Grade, dataTime, sidoName}) {
+function Card ({data, existFavorite = false, onClick, favorite}) {
+  const {stationName, pm10Value, pm10Grade, dataTime, sidoName} = data;
   const {text, color} = makeInfomation(pm10Grade);
   return (
     <Rect color={color}>
@@ -34,7 +35,7 @@ function Card ({stationName, pm10Value, pm10Grade, dataTime, sidoName}) {
             <div>{stationName}</div>
             <div className="flex pos-b fs-small mg-left-s mg-bottom-s">{sidoName}</div>
           </div>
-          <Favorite/>
+          { existFavorite ? <Favorite data={data} onClick={onClick} favorite={favorite}/> : null }
         </div>
         <div className="flex pos-mc">
           <DustGradeText className="fs-large" color={color}>{text}</DustGradeText>

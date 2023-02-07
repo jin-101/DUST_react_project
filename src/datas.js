@@ -7,11 +7,13 @@ export const initialUserInfo = {
   first:'경북',
   second: '진량읍'
 }
+export const inintialUserFavorite = [];
 
 export const initialApiData = {
   data: [],
   list: []
 }
+
 
 export const firstPageState = {
   ...initialUserInfo
