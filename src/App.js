@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import TotalRegion from './containers/TotalRegion';
 import './main.scss';
 import { firstPageState, inintialUserFavorite, initialApiData, navigatorMenu, regionList, secondPageState } from './datas';
 import MyRegion from './containers/MyRegion';
-import Loading from './components/Loading';
-import Dropdown from './components/Dropdown';
+import FavoriteRegion from './containers/FavoriteRegion';
+import TotalRegion from './containers/TotalRegion';
 
 
 const Button = styled.div`
@@ -47,7 +46,7 @@ function App () {
       case 0:
         setFirstP({
           ...firstP,
-          'second':'',
+          'stationName':'',
           [name]: value
         })
         return;
@@ -63,28 +62,28 @@ function App () {
   },[pageState,firstP,secondP])
   
   const favoriteOnClick = (bool, data) => {
-    console.error(bool,data,favoriteArray);
-    if(bool) setfavoriteArray([...favoriteArray, data.stationName])
-    else setfavoriteArray(favoriteArray.filter(arr => arr !== data.stationName))
+    const currentData = {
+      sidoName: data.sidoName,
+      stationName: data.stationName
+    }
+    console.log('즐겨찾기를 눌렀어요.', bool,favoriteArray,currentData);
+    if(bool) {
+      return setfavoriteArray([
+        ...favoriteArray, 
+        currentData
+      ])
+    } else {
+      return setfavoriteArray(
+        favoriteArray.filter(arr => arr.stationName !== currentData.stationName)
+      )
+    }
   }
   
 
   useEffect(() => {
     if(pageState===2) return;
     console.warn('useEffect안에 들어옴', apiData, firstP, secondP);
-    const current = [firstP,secondP][pageState]['first'];
-
-     //기존 코드
-    // if(apiData.data.some(el=>el.sidoName===current)) return
-    // else setApiData(initialApiData);
-
-    // if(test.some(el=>el.sidoName===current)) {
-    //   const newData = test.filter(el=>el.sidoName===current);
-    //   setApiData({data: newData, list: newData.map(el => el.stationName)})
-    //   return;
-    // }else setApiData(initialApiData);
-
-   
+    const current = [firstP,secondP][pageState]['sidoName'];
 
     if(!apiData.data.some(el=>el.sidoName===current)) setApiData(initialApiData);
     
@@ -99,10 +98,6 @@ function App () {
     fetch(`https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey=${getParameters['serviceKey']}&returnType=${getParameters['returnType']}&numOfRows=${getParameters['numOfRows']}&pageNo=${getParameters['pageNo']}&sidoName=${getParameters['sidoName']}&ver=${getParameters['ver']}`)
     .then(response => response.json())
     .then(data => {
-      //기존 코드
-      // const datas = data['response']['body']['items'];
-      // setApiData({data: datas, list: datas.map(el => el.stationName)})
-
       const datas = [...test, ...data['response']['body']['items']].reverse().filter((arr, index, callback) => index ===callback.findIndex((loc) => loc.stationName === arr.stationName)).reverse();
       setTest(datas);
       if(datas.some(el=>el.sidoName===current)) {
@@ -110,56 +105,37 @@ function App () {
         setApiData({data: newData, list: newData.map(el => el.stationName)})
         console.log('데이터 통합(중복제거)', datas, '현재 데이터', newData);
       }
-      // setApiData({data: datas, list: datas.map(el => el.stationName)})
-      // console.log('현재 데이터', datas);
-
-      // setTest([...test, ...datas].reverse().filter((arr, index, callback) => index ===callback.findIndex((loc) => loc.stationName === arr.stationName)).reverse())
-
     })
   },[firstP,secondP,pageState])
   
-  // console.log('test 배열 입니다.',test)
-  // console.log([{'aa':1,'bb':1},{'aa':2,'bb':1}, {'aa':3,'bb':1}, {'aa':4,'bb':1},{'aa':1,'bb':10},{'aa':3,'bb':10}].reverse().filter((arr, index, callback) => index ===callback.findIndex((loc) => loc.aa === arr.aa)).reverse());
   return (
     <div className='flex pos-mc'>
       <div className='w-80per'>
-        <div className='flex pos-mc mg-small h-50'> 
-          { //상단 부분
-            <>
-            {
-            (apiData.data.length > 0 && pageState!==2) ?  //page가 0,1일 때 dropdown
-              Object.entries([firstP,secondP][pageState]).map((els,index) => {
-                const lists = index===0 ? regionList : apiData.list
-                return <Dropdown key={index} name={els[0]} val={els[1]} list={lists} onChange={dropChange}/>
-              }) : null
-            }
-            </>
-          }
-        </div>
-        <div>
-          { //content 부분
-          apiData.data.length === 0 ? <Loading/>
-            :pageState===0 ? <MyRegion 
-                                data={apiData.data} 
-                                val = {[firstP,secondP][pageState]['second']}
-                              /> // page가 0일 때 가운데 영역 만들기
-              : pageState===1 ? <TotalRegion 
-                                  data={apiData.data} 
-                                  favoriteData={favoriteArray} 
-                                  onClick={favoriteOnClick} 
-                                /> // page가 1일 때 가운데 영역 만들기   onClick={favoriteOnClick}
-                : pageState===2 ? <TotalRegion 
-                                    data={test} 
-                                    favoriteData={favoriteArray} 
-                                    onClick={favoriteOnClick}
-                                    isAll={true} 
-                                  /> // page가 2일 때 가운데 영역 만들기   data = {favoriteArray} onClick={favoriteOnClick}
-                  : null 
-          }
-        </div>
-        {  console.log('즐겨찾기',favoriteArray, apiData)}
-        {/* {apiData.data.filter(x => favoriteArray.includes(x.stationName))} */}
-        {/* {console.log(apiData.data.filter(x => favoriteArray.includes(x.stationName)))} */}
+        {/* content 부분 */}
+        {
+          pageState===0 
+          ? <MyRegion 
+              dataSet={apiData} // 그릴 데이터
+              // list = {apiData.list}
+              value = {firstP} //내 지역 firstP
+              onChange = {dropChange}
+            /> // page가 0일 때 가운데 영역 만들기
+          : pageState===1 
+            ? <TotalRegion 
+                dataSet={apiData}
+                value = {secondP} //내 지역 firstP // 그릴 데이터
+                onChange = {dropChange}
+                favoriteData={favoriteArray}  // 즐겨찾기 등록 지역
+                onClick={favoriteOnClick} // 즐겨찾기 클릭시 호출함수
+              /> // page가 1일 때 가운데 영역 만들기   onClick={favoriteOnClick}
+            : pageState===2 
+              ? <FavoriteRegion 
+                  data={test} // 그릴 데이터
+                  favoriteData={favoriteArray}  // 즐겨찾기 등록 지역
+                  onClick={favoriteOnClick} // 즐겨찾기 클릭시 호출함수
+                /> // page가 2일 때 가운데 영역 만들기   data = {favoriteArray} onClick={favoriteOnClick}
+              : null 
+        }
         {/* 하단 네비게이션 영역 */}
         <div className='flex pos-mc h-100'>
           {navigatorMenu.map(item => {

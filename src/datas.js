@@ -4,10 +4,15 @@ import { MdStar } from "react-icons/md";
 
 // 사용자 정보
 export const initialUserInfo = {
-  first:'경북',
-  second: '진량읍'
+  sidoName:'경북',
+  stationName: '진량읍'
 }
-export const inintialUserFavorite = [];
+export const inintialUserFavorite = [
+  // {sidoName:'경북',stationName:'진량읍'},
+  // {sidoName:'서울',stationName:'정릉로'},
+  // {sidoName:'서울',stationName:'동대문구'}
+];
+
 
 export const initialApiData = {
   data: [],
@@ -19,7 +24,7 @@ export const firstPageState = {
   ...initialUserInfo
 }
 export const secondPageState = {
-  first:'서울'
+  sidoName:'서울'
 }
 
 export const navigatorMenu = [
