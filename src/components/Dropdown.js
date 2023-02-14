@@ -16,7 +16,7 @@ const SelectBox = styled.select`
 `;
 
 function Dropdown ({name, val, list, onChange}){
-  console.log('상위탭 만들기');
+  // console.log('상위탭 만들기 dropdown');
   return (
     <div className='flex pos-mc mg-small w-100per h-100per'>
       <SelectBox name={name} onChange={(e)=>{onChange(e)}} key={uuid()} defaultValue={val}>

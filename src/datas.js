@@ -7,23 +7,10 @@ export const initialUserInfo = {
   sidoName:'경북',
   stationName: '진량읍'
 }
-export const inintialUserFavorite = [
-  // {sidoName:'경북',stationName:'진량읍'},
-  // {sidoName:'서울',stationName:'정릉로'},
-  // {sidoName:'서울',stationName:'동대문구'}
-];
-
-
-export const initialApiData = {
-  data: [],
-  list: []
-}
-
-
-export const firstPageState = {
+export const initialMyRegionState = {
   ...initialUserInfo
 }
-export const secondPageState = {
+export const initialTotalRegionState = {
   sidoName:'서울'
 }
 

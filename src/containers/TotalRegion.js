@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Card from "../components/Card";
 import Dropdown from "../components/Dropdown";
@@ -9,9 +10,9 @@ const CardsStyle = styled.div`
   overflow : auto;
 `;
 
-function TotalRegion ({dataSet,  value, onChange, favoriteData, onClick}) {  
-  console.log('1번일 때 내용카드만들기', dataSet);
-  const {data} = dataSet;
+function TotalRegion ({value, onChange, onClick}) {  
+  const {currentData, bookMark} = useSelector(state => state.favorite);
+  // console.log('1번일 때 내용카드만들기', currentData);
   return (
     <>
       <div className='flex pos-mc mg-small h-50'>
@@ -21,19 +22,38 @@ function TotalRegion ({dataSet,  value, onChange, favoriteData, onClick}) {
       </div>
       <div>
         <CardsStyle>
+          { currentData.length===0 
+              ? <Loading/>
+              : currentData.map((el,index) => {
+                  const bool = bookMark.some(origin => origin.stationName === el.stationName);
+                  return (
+                    <Card 
+                      data = {el}
+                      key = {index}
+                      existFavorite = {true}
+                      isFavorite = {bool}
+                      onClick = {onClick}
+                    />
+                  )
+                })
+          }
           {
-            data.length===0 || !favoriteData 
-            ? <Loading/>
-            : data.map((el,index) => {
-              const bool = favoriteData.some(origin => origin.stationName === el.stationName);
-                console.log(bool);
-              return <Card 
-                data = {el}
-                key = {index}
-                existFavorite = {true}
-                isFavorite = {bool}
-                onClick = {onClick}
-              />})
+            // dataSet.length===0 
+            // // || !bookMark 
+            // ? <Loading/>
+            // : dataSet.map((el,index) => {
+            //     const bool = bookMark.some(origin => origin.stationName === el.stationName);
+            //     return (
+            //       <Card 
+            //         data = {el}
+            //         key = {index}
+            //         existFavorite = {true}
+            //         isFavorite = {bool}
+            //         onClick = {onClick}
+            //       />
+            //     )
+            //   })
+            
           }
         </CardsStyle>
       </div>
