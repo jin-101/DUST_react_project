@@ -7,7 +7,7 @@ import Loading from "../components/Loading";
 import { makeApiParams } from "../services/api";
 
 const CardsStyle = styled.div`
-  height: 600px;
+  height: 550px;
   overflow : auto;
 `;
 

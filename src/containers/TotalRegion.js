@@ -9,7 +9,7 @@ import { makeApiParams } from "../services/api";
 import { regionList } from "../utils";
 
 const CardsStyle = styled.div`
-  height: 600px;
+  height: 550px;
   overflow : auto;
 `;
 

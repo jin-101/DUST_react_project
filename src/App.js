@@ -10,7 +10,7 @@ function App () {
   const { pageState } = useSelector(state => state.dust);
 
   return (
-    <div className='flex pos-mc'>
+    <div className='flex pos-mc w-min400 scroll-none'>
       <div className='w-80per'>
         { /* content 부분 */
           pageState===0 

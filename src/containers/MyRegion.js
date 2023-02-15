@@ -8,8 +8,8 @@ import Loading from "../components/Loading";
 import { makeApiParams } from "../services/api";
 import { regionList } from "../utils";
 
-const Cards = styled.div`
-  height: 600px;
+const CardsStyle = styled.div`
+  height: 550px;
   overflow : auto;
 `;
 
@@ -43,9 +43,9 @@ function MyRegion ({onChange}) {
         {
           !myRegion 
             ? <Loading/>
-            : <Cards>
+            : <CardsStyle>
                 <Card data = {myRegion}/>
-              </Cards>
+              </CardsStyle>
         }
       </div>
     </>

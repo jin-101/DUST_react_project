@@ -21,6 +21,9 @@
   &-100per {
     width: 40%;
   }
+  &-min400 {
+    min-width: 400px;
+  }
 }
 
 .h {
@@ -84,5 +87,11 @@
   }
   &-yellow {
     background-color: yellow;
+  }
+}
+
+.scroll {
+  &-none {
+    overflow: hidden;
   }
 }
