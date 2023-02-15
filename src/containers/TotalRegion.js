@@ -1,8 +1,11 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { receiveApiData, receiveApiTotalData } from "../actions";
 import Card from "../components/Card";
 import Dropdown from "../components/Dropdown";
 import Loading from "../components/Loading";
+import { makeApiParams } from "../services/api";
 import { regionList } from "../utils";
 
 const CardsStyle = styled.div`
@@ -14,6 +17,18 @@ function TotalRegion ({onChange}) {
   const currentTotalState = useSelector(state => state.dust.currentTotalState);
   const currentData = useSelector(state => state.dust.currentData);
   const bookMark = useSelector(state => state.dust.bookMark);
+  const dispatch = useDispatch();
+ useEffect(() => {
+    dispatch(receiveApiData()) //current api 초기화
+      fetch(makeApiParams(currentTotalState['sidoName']))
+        .then(response => response.json())
+        .then(data => {
+          const currentData = data['response']['body']['items'];
+          dispatch(receiveApiData(currentData))  // 현재 선택된 시,도 데이터 업데이트
+          dispatch(receiveApiTotalData(currentData)) // 전체 데이터 추가
+        })
+  },[currentTotalState, dispatch])
+
   return (
     <>
       <div className='flex pos-mc mg-small h-50'>

@@ -1,8 +1,11 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { receiveApiData, receiveApiTotalData } from "../actions";
 import Card from "../components/Card";
 import Dropdown from "../components/Dropdown";
 import Loading from "../components/Loading";
+import { makeApiParams } from "../services/api";
 import { regionList } from "../utils";
 
 const Cards = styled.div`
@@ -13,6 +16,19 @@ const Cards = styled.div`
 function MyRegion ({onChange}) {
   const currentMyState = useSelector(state => state.dust.currentMyState);
   const currentData = useSelector(state => state.dust.currentData);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(receiveApiData()) //current api 초기화
+      fetch(makeApiParams(currentMyState['sidoName']))
+        .then(response => response.json())
+        .then(data => {
+          const currentData = data['response']['body']['items'];
+          dispatch(receiveApiData(currentData))  // 현재 선택된 시,도 데이터 업데이트
+          dispatch(receiveApiTotalData(currentData)) // 전체 데이터 추가
+        })
+  },[currentMyState, dispatch])
+
   const myRegion = currentData.filter((el) => el.stationName === currentMyState.stationName)[0] || currentData[0];
   if(!currentData.length === 0) return <Loading/>
   return (
