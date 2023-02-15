@@ -19,6 +19,7 @@ export const initialMyFavoriteRegion = [
 
 // 초기상태
 export const initialData = {
+  pageState: 1,
   currentData : [],
   totalData : [],
   bookMark : [

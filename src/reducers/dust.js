@@ -1,9 +1,14 @@
-import { ADD_TO_FAVORITE, CURRENT_MY_REGION, CURRENT_TOTAL_REGION, RECIEVE_API_DATA, RECIEVE_API_TOTAL_DATA, REMOVE_TO_FAVORITE } from '../actions';
+import { ADD_TO_FAVORITE, CURRENT_MY_REGION, CURRENT_TOTAL_REGION, PAGE_UPDATE, RECIEVE_API_DATA, RECIEVE_API_TOTAL_DATA, REMOVE_TO_FAVORITE } from '../actions';
 import { initialData } from '../datas';
 
 //리듀서
-export default function favorite (state = initialData, action) {
+export default function dust (state = initialData, action) {
   switch (action.type){
+    case PAGE_UPDATE:
+      return {
+        ...state,
+        pageState : action.data
+      }
     case RECIEVE_API_DATA:
       return {
         ...state,
@@ -20,13 +25,11 @@ export default function favorite (state = initialData, action) {
         .reverse()
       }
     case ADD_TO_FAVORITE:
-      console.log('ADD_TO_FAVORITE',state, action.data);
       return { 
         ...state,
         bookMark : state.bookMark.concat(action.data)
       };
     case REMOVE_TO_FAVORITE:
-      console.log('REMOVE_TO_FAVORITE',state, action.data);
       return {
         ...state,
         bookMark : state.bookMark.filter(

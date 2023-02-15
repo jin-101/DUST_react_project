@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import favorite from './favorite'
+import dust from './dust'
 
 const rootReducer = combineReducers({
   // 리듀서들을 입력한다.
-  favorite
+  dust
 });
 
 export default rootReducer;

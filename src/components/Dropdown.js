@@ -1,5 +1,8 @@
+import { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import uuid from "react-uuid";
 import styled from "styled-components";
+import { currentMyRegion, currentTotalRegion } from "../actions";
 
 const SelectBox = styled.select`
     margin: 0;
@@ -15,11 +18,27 @@ const SelectBox = styled.select`
     background-color: transparent;
 `;
 
-function Dropdown ({name, val, list, onChange}){
-  // console.log('상위탭 만들기 dropdown');
+function Dropdown ({name, val, list}){
+    const { pageState } = useSelector(state => state.dust);
+    const dispatch = useDispatch();
+
+    const dropChange = useCallback((e) => {
+    const {name, value} = e.target;
+    switch (pageState) {
+      case 0:
+        dispatch(currentMyRegion({[name]:value}))
+        return;
+      case 1:
+        dispatch(currentTotalRegion({[name]:value}))
+        return;
+      default:
+        return null;
+    }
+  },[pageState, dispatch])
+
   return (
     <div className='flex pos-mc mg-small w-100per h-100per'>
-      <SelectBox name={name} onChange={(e)=>{onChange(e)}} key={uuid()} defaultValue={val}>
+      <SelectBox name={name} onChange={(e)=>{dropChange(e)}} key={uuid()} defaultValue={val}>
         {list.map((el,i) => {
           return <option key={i} value={el}>{el}</option>;
         })}

@@ -7,6 +7,7 @@ export const ADD_TO_FAVORITE = 'ADD_TO_FAVORITE';
 export const REMOVE_TO_FAVORITE = 'REMOVE_TO_FAVORITE';
 export const CURRENT_MY_REGION = 'CURRENT_MY_REGION';
 export const CURRENT_TOTAL_REGION = 'CURRENT_TOTAL_REGION';
+export const PAGE_UPDATE = 'PAGE_UPDATE';
 
 
 //action 함수
@@ -16,4 +17,4 @@ export const addFavorite = data => ({type: ADD_TO_FAVORITE, data})
 export const removeFavorite = data => ({type: REMOVE_TO_FAVORITE, data}) 
 export const currentMyRegion = (data = initialMyRegionState) => ({type:CURRENT_MY_REGION, data})
 export const currentTotalRegion = (data = initialTotalRegionState) => ({type:CURRENT_TOTAL_REGION, data})
-
+export const pageUpdate = data => ({type:PAGE_UPDATE,data})

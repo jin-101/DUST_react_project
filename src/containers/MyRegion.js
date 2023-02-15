@@ -11,11 +11,10 @@ const Cards = styled.div`
 `;
 
 function MyRegion ({onChange}) {
-  const currentMyState = useSelector(state => state.favorite.currentMyState);
-  const currentData = useSelector(state => state.favorite.currentData);
+  const currentMyState = useSelector(state => state.dust.currentMyState);
+  const currentData = useSelector(state => state.dust.currentData);
   const myRegion = currentData.filter((el) => el.stationName === currentMyState.stationName)[0] || currentData[0];
   if(!currentData.length === 0) return <Loading/>
-  
   return (
     <> 
       <div className='flex pos-mc mg-small h-50'> 

@@ -9,11 +9,10 @@ const CardsStyle = styled.div`
 `;
 
 function FavoriteRegion () { 
-  const totalData = useSelector(state => state.favorite.totalData);
-  const bookMark = useSelector(state => state.favorite.bookMark);
+  const totalData = useSelector(state => state.dust.totalData);
+  const bookMark = useSelector(state => state.dust.bookMark);
   const favoriteArray = totalData.filter(x => bookMark.some(origin => origin.stationName === x.stationName));
   const isLoading = favoriteArray.length !== bookMark.length;
-  
   return (
     <>
       <div className='flex pos-mc mg-small h-50'></div>

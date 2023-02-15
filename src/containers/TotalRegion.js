@@ -11,10 +11,9 @@ const CardsStyle = styled.div`
 `;
 
 function TotalRegion ({onChange}) {  
-  const currentTotalState = useSelector(state => state.favorite.currentTotalState);
-  const currentData = useSelector(state => state.favorite.currentData);
-  const bookMark = useSelector(state => state.favorite.bookMark);
-
+  const currentTotalState = useSelector(state => state.dust.currentTotalState);
+  const currentData = useSelector(state => state.dust.currentData);
+  const bookMark = useSelector(state => state.dust.bookMark);
   return (
     <>
       <div className='flex pos-mc mg-small h-50'>
