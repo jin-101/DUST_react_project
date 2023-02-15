@@ -7,7 +7,7 @@ import Loading from "../components/Loading";
 import { makeApiParams } from "../services/api";
 
 const CardsStyle = styled.div`
-  height: 550px;
+  height: 600px;
   overflow : auto;
 `;
 
@@ -37,7 +37,6 @@ function FavoriteRegion () {
   const isLoading = favoriteArray.length !== bookMark.length;
   return (
     <>
-      <div className='flex pos-mc mg-small h-50'></div>
       <div>
         { isLoading
           ? <Loading/>
