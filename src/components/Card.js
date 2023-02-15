@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import Favorite from "./Favorite";
 import '../main.scss';
@@ -25,7 +24,7 @@ const DustGradeText = styled.div`
   color: ${props => props.color || 'black'};
 `;
 
-function Card ({data, existFavorite = false, onClick, isFavorite}) {
+function Card ({data, existFavorite = false, isFavorite}) {
   const {stationName, pm10Value, pm10Grade, dataTime, sidoName} = data;
   const {text, color} = makeInfomation(pm10Grade);
   return (
@@ -35,7 +34,7 @@ function Card ({data, existFavorite = false, onClick, isFavorite}) {
             <div>{stationName}</div>
             <div className="flex pos-b fs-small mg-left-s mg-bottom-s">{sidoName}</div>
           </div>
-          { existFavorite ? <Favorite data={data} onClick={onClick} isFavorite={isFavorite}/> : null }
+          { existFavorite ? <Favorite data={data} isFavorite={isFavorite}/> : null }
         </div>
         <div className="flex pos-mc">
           <DustGradeText className="fs-large" color={color}>{text}</DustGradeText>

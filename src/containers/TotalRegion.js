@@ -10,13 +10,15 @@ const CardsStyle = styled.div`
   overflow : auto;
 `;
 
-function TotalRegion ({value, onChange, onClick}) {  
-  const {currentData, bookMark} = useSelector(state => state.favorite);
-  // console.log('1번일 때 내용카드만들기', currentData);
+function TotalRegion ({onChange}) {  
+  const currentTotalState = useSelector(state => state.favorite.currentTotalState);
+  const currentData = useSelector(state => state.favorite.currentData);
+  const bookMark = useSelector(state => state.favorite.bookMark);
+
   return (
     <>
       <div className='flex pos-mc mg-small h-50'>
-        {Object.entries(value).map((els, index) => {
+        {Object.entries(currentTotalState).map((els, index) => {
           return <Dropdown key={index} name={els[0]} val={els[1]} list={regionList} onChange={onChange}/>
         })}     
       </div>
@@ -32,28 +34,9 @@ function TotalRegion ({value, onChange, onClick}) {
                       key = {index}
                       existFavorite = {true}
                       isFavorite = {bool}
-                      onClick = {onClick}
                     />
                   )
                 })
-          }
-          {
-            // dataSet.length===0 
-            // // || !bookMark 
-            // ? <Loading/>
-            // : dataSet.map((el,index) => {
-            //     const bool = bookMark.some(origin => origin.stationName === el.stationName);
-            //     return (
-            //       <Card 
-            //         data = {el}
-            //         key = {index}
-            //         existFavorite = {true}
-            //         isFavorite = {bool}
-            //         onClick = {onClick}
-            //       />
-            //     )
-            //   })
-            
           }
         </CardsStyle>
       </div>

@@ -10,15 +10,16 @@ const Cards = styled.div`
   overflow : auto;
 `;
 
-function MyRegion ({value, onChange}) {
-  const {currentData} = useSelector(state => state.favorite);
-  // console.log('0번일때 내용카드 만들기', {currentData,value});
-  const myRegion = currentData.filter((el) => el.stationName === value.stationName)[0] || currentData[0];
+function MyRegion ({onChange}) {
+  const currentMyState = useSelector(state => state.favorite.currentMyState);
+  const currentData = useSelector(state => state.favorite.currentData);
+  const myRegion = currentData.filter((el) => el.stationName === currentMyState.stationName)[0] || currentData[0];
   if(!currentData.length === 0) return <Loading/>
+  
   return (
     <> 
       <div className='flex pos-mc mg-small h-50'> 
-      {Object.entries(value).map((els, index) => {
+      {Object.entries(currentMyState).map((els, index) => {
           const lists = index===0 ? regionList : currentData.map(el => el.stationName)
           return <Dropdown key={index} name={els[0]} val={els[1]} list={lists} onChange={onChange}/>
       })}

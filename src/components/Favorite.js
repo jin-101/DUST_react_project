@@ -1,5 +1,7 @@
 import { MdStar, MdStarBorder } from "react-icons/md";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { addFavorite, removeFavorite } from "../actions";
 
 
 const PosRight = styled.div`
@@ -7,10 +9,14 @@ const PosRight = styled.div`
   right: 20px
 `;
 
-function Favorite ({data, onClick, isFavorite}){
-  const favoriteChange = () => onClick(!isFavorite, data);
+function Favorite ({data, isFavorite}){
+  const dispatch = useDispatch();
+  const onClick = (bool, data) => {
+    if (bool) dispatch(addFavorite(data))
+    else dispatch(removeFavorite(data))
+  }
   return(
-    <PosRight onClick={favoriteChange}>
+    <PosRight onClick={() => onClick(!isFavorite, data)}>
       {isFavorite?<MdStar/> : <MdStarBorder/>}
     </PosRight>
   )
