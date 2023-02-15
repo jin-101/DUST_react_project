@@ -2,37 +2,6 @@ import { BiMap } from "react-icons/bi";
 import { GrMap } from "react-icons/gr";
 import { MdStar } from "react-icons/md";
 
-// 사용자 정보
-export const initialMyRegionState = {
-    sidoName:'경기',
-    stationName: '교문동'
-}
-export const initialTotalRegionState = {
-  sidoName:'서울'
-}
-export const initialMyFavoriteRegion = [
-  {sidoName:'대구',stationName:'남산1동'},
-  {sidoName:'서울',stationName:'정릉로'},
-  {sidoName:'서울',stationName:'동대문구'},
-  {sidoName:'경기',stationName:'금곡동'}
-]
-
-// 초기상태
-export const initialData = {
-  pageState: 1,
-  currentData : [],
-  totalData : [],
-  bookMark : [
-    ...initialMyFavoriteRegion
-  ],
-  currentMyState : {
-    ...initialMyRegionState
-  },
-  currentTotalState : {
-    ...initialTotalRegionState
-  }
-}
-
 export const navigatorMenu = [
   {index:0, text:'내 지역보기', icon: <BiMap/>},
   {index:1, text:'전체 시도보기', icon: <GrMap/>},

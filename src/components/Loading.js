@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import  {Circles } from 'react-loader-spinner'
+import  { Circles } from 'react-loader-spinner'
 
 const LoadingPage = styled.div`
   height: 600px;

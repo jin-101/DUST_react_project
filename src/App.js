@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
-import './main.scss';
-import { makeApiParams } from './api/api';
+import './styles/main.scss';
+import { makeApiParams } from './services/api';
 import MyRegion from './containers/MyRegion';
 import FavoriteRegion from './containers/FavoriteRegion';
 import TotalRegion from './containers/TotalRegion';
-import { useDispatch, useSelector } from 'react-redux';
-import { receiveCurrentData, receiveTotalData } from './actions';
 import Button from './components/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import { receiveApiData, receiveApiTotalData } from './actions';
 
 function App () {
   const { pageState, currentMyState, currentTotalState, totalData, bookMark } = useSelector(state => state.dust);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(receiveCurrentData()) //current api 초기화
+    dispatch(receiveApiData()) //current api 초기화
     if(pageState===2) { //즐겨찾기 기능 시 미리 받은 데이터가 없을 수도 있으므로 예외로 별로 처리
       const addTotalEl = [
         ...new Set(
@@ -25,7 +25,7 @@ function App () {
         fetch(makeApiParams(el))
           .then(response => response.json())
           .then(data => {
-            dispatch(receiveTotalData(data['response']['body']['items'])) // 전체 데이터 추가
+            dispatch(receiveApiTotalData(data['response']['body']['items'])) // 전체 데이터 추가
           })
       });  
     } else {
@@ -33,8 +33,8 @@ function App () {
         .then(response => response.json())
         .then(data => {
           const currentData = data['response']['body']['items'];
-          dispatch(receiveCurrentData(currentData))  // 현재 선택된 시,도 데이터 업데이트
-          dispatch(receiveTotalData(currentData)) // 전체 데이터 추가
+          dispatch(receiveApiData(currentData))  // 현재 선택된 시,도 데이터 업데이트
+          dispatch(receiveApiTotalData(currentData)) // 전체 데이터 추가
         })
     }
   },[currentMyState, currentTotalState, pageState, dispatch])

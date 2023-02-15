@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Favorite from "./Favorite";
-import '../main.scss';
-import { makeInfomation } from "../datas";
+import '../styles/main.scss';
+import { makeInfomation } from "../utils";
 
 const Rect = styled.div`
   justify-content: center;

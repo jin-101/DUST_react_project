@@ -1,4 +1,4 @@
-import { navigatorMenu } from "../datas";
+import { navigatorMenu } from "../utils";
 import styled from 'styled-components';
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";

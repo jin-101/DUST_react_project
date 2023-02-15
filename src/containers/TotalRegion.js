@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Card from "../components/Card";
 import Dropdown from "../components/Dropdown";
 import Loading from "../components/Loading";
-import { regionList } from "../datas";
+import { regionList } from "../utils";
 
 const CardsStyle = styled.div`
   height: 600px;

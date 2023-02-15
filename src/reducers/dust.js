@@ -1,5 +1,21 @@
-import { ADD_TO_FAVORITE, CURRENT_MY_REGION, CURRENT_TOTAL_REGION, PAGE_UPDATE, RECIEVE_API_DATA, RECIEVE_API_TOTAL_DATA, REMOVE_TO_FAVORITE } from '../actions';
-import { initialData } from '../datas';
+import { ADD_TO_FAVORITE, CURRENT_MY_REGION, CURRENT_TOTAL_REGION, PAGE_UPDATE, RECIEVE_API_DATA, RECIEVE_API_TOTAL_DATA, REMOVE_TO_FAVORITE } from '../constants';
+import { initialMyFavoriteRegion, initialMyRegionState, initialTotalRegionState } from '../services/api';
+
+// 초기상태
+const initialData = {
+  pageState: 1,
+  currentData : [],
+  totalData : [],
+  bookMark : [
+    ...initialMyFavoriteRegion
+  ],
+  currentMyState : {
+    ...initialMyRegionState
+  },
+  currentTotalState : {
+    ...initialTotalRegionState
+  }
+}
 
 //리듀서
 export default function dust (state = initialData, action) {
