@@ -1,4 +1,4 @@
-## Project 소개 : 미세먼지 알리미
+## 프로젝트 : 미세먼지 알리미
 
 ### 요구사항
   * 미세먼지 공공데이터 API 를 활용하여, 미세먼지 정보를 보기 쉽게 보여주는 서비스를 만들어봅니다.
@@ -8,7 +8,8 @@
 
 ### 개발환경
   * Framework : react
-  * 상태관리 : redux
+  * 상태관리 library : react-redux
+  * style library : styled-components
 
 ### 주요기능
   *  특정 시/도의 미세먼지 정보를 모두 리스팅하는 기능
